@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rural.mapper.HotspotInfoMapper">
+
+    <select id="selectPageAll" resultType="com.rural.pojo.HotspotInfo">
+        select hotspot_info.*,hotspot_type.type_name as typeName
+        from hotspot_info,hotspot_type
+        where hotspot_info.type_id = hotspot_type.id
+        <if test="msg != null">
+            and ${type} like "%"#{msg}"%"
+        </if>
+    </select>
+    <select id="selectListById" resultType="com.rural.pojo.HotspotInfo">
+        select hotspot_info.*,hotspot_type.type_name as typeName
+        from hotspot_info,hotspot_type
+        where hotspot_info.type_id = hotspot_type.id
+        and hotspot_info.type_id = #{id}
+        and hotspot_info.status = 0
+    </select>
+</mapper>

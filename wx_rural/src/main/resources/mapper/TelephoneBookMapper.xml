@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rural.mapper.TelephoneBookMapper">
+
+    <select id="selectAll" resultType="com.rural.pojo.TelephoneBook">
+        select telephone_book.*,phone_type.type_name as typeName
+        from telephone_book,phone_type
+        where telephone_book.type_id = phone_type.id
+    </select>
+    <select id="selectAllById" resultType="com.rural.pojo.TelephoneBook">
+        select telephone_book.*,phone_type.type_name as typeName
+        from telephone_book,phone_type
+        where telephone_book.type_id = phone_type.id
+        and telephone_book.type_id = #{id}
+    </select>
+
+</mapper>

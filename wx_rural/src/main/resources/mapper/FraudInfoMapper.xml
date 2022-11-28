@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rural.mapper.FraudInfoMapper">
+
+    <select id="selectPageAll" resultType="com.rural.pojo.FraudInfo">
+        select fraud_info.*,fraud_type.type_name as typeName
+        from fraud_info,fraud_type
+        where fraud_info.type_id = fraud_type.id
+        <if test="msg != null">
+            and ${type} like "%"#{msg}"%"
+        </if>
+    </select>
+    <select id="selectListById" resultType="com.rural.pojo.FraudInfo">
+        select fraud_info.*,fraud_type.type_name as typeName
+        from fraud_info,fraud_type
+        where fraud_info.type_id = fraud_type.id
+        and fraud_info.type_id = #{id}
+        and fraud_info.status = 0
+    </select>
+</mapper>

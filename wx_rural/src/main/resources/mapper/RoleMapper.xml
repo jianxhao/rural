@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rural.mapper.RoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.rural.pojo.Role">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="roleKey" column="role_key" jdbcType="VARCHAR"/>
+            <result property="perms" column="perms" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 根据用户信息查找权限信息 -->
+    <select id="selectPermsInAdmin" resultType="java.lang.String">
+        select distinct role.perms from role,admin_user,user_role
+        where role.id = user_role.role_id
+        and user_role.user_id = admin_user.id
+        and admin_user.id = #{id}
+    </select>
+</mapper>
